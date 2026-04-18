@@ -102,10 +102,20 @@ body { background: linear-gradient(180deg, #7ed8ff 0%, #92b7ff 40%, #a881ff 100%
 <script>
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
-function ensureAudio() {
+let audioPrimed = false;
+async function ensureAudio() {
   if (!audioCtx) audioCtx = new AudioCtx();
-  if (audioCtx.state === 'suspended') return audioCtx.resume();
-  return Promise.resolve();
+  if (audioCtx.state === 'suspended') await audioCtx.resume();
+  if (!audioPrimed) {
+    const buffer = audioCtx.createBuffer(1, 1, 22050);
+    const source = audioCtx.createBufferSource();
+    const gain = audioCtx.createGain();
+    gain.gain.value = 0.0001;
+    source.buffer = buffer;
+    source.connect(gain).connect(audioCtx.destination);
+    source.start(0);
+    audioPrimed = true;
+  }
 }
 const NOTES = [
   { name: 'C', label: 'Do', freq: 261.63, color: '#ff5f8e', type: 'white', whiteIndex: 0 },
@@ -245,7 +255,7 @@ function completeActiveNote() {
 
 async function handleInput(noteIndex) {
   await ensureAudio();
-  playTone(NOTES[noteIndex].freq);
+  setTimeout(() => playTone(NOTES[noteIndex].freq), 0);
   pressKey(noteIndex);
   if (mode === 'free') return;
   if (activeNote && activeNote.noteIndex === noteIndex) {
