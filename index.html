@@ -221,28 +221,33 @@ function spawnCurrentSongNote() {
   lane.appendChild(el);
   activeNote = { noteIndex, lane, el, y: -NOTE_HEIGHT - 8, waiting: false, hit: false };
 }
+function completeActiveNote() {
+  if (!activeNote) return;
+  activeNote.hit = true;
+  activeNote.el.remove();
+  activeNote = null;
+  progressIndex += 1;
+  renderProgress();
+  if (progressIndex >= SONG.notes.length) {
+    document.getElementById('hint').textContent = 'Nice. Song finished.';
+    celebrate();
+    songRunning = false;
+  } else {
+    document.getElementById('hint').textContent = `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
+    songTimeout = setTimeout(() => { songTimeout = null; spawnCurrentSongNote(); }, 220);
+  }
+}
+
 function handleInput(noteIndex) {
   playTone(NOTES[noteIndex].freq);
   pressKey(noteIndex);
   if (mode === 'free') return;
-  if (activeNote && activeNote.waiting && activeNote.noteIndex === noteIndex) {
-    activeNote.hit = true;
-    activeNote.el.remove();
-    activeNote = null;
-    progressIndex += 1;
-    renderProgress();
-    if (progressIndex >= SONG.notes.length) {
-      document.getElementById('hint').textContent = 'Nice. Song finished.';
-      celebrate();
-      songRunning = false;
-    } else {
-      document.getElementById('hint').textContent = `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
-      songTimeout = setTimeout(() => { songTimeout = null; spawnCurrentSongNote(); }, 220);
-    }
+  if (activeNote && activeNote.noteIndex === noteIndex) {
+    completeActiveNote();
   } else if (songRunning) {
     missFlash = true;
     renderProgress();
-    document.getElementById('hint').textContent = activeNote && !activeNote.waiting ? 'Wait for the note to land first.' : 'Wrong key. Press the key for the waiting note.';
+    document.getElementById('hint').textContent = activeNote ? `Wrong key. Press ${NOTES[activeNote.noteIndex].label}.` : 'No active note yet.';
     setTimeout(() => { missFlash = false; renderProgress(); }, 220);
   }
 }
