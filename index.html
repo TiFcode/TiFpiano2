@@ -290,7 +290,7 @@ function celebrate() {
     }, i * 60);
   }
 }
-function playTone(freq, duration = .42) {
+function playTone(freq, duration = 1.26) {
   if (!audioCtx) return;
   const now = audioCtx.currentTime;
   const o1 = audioCtx.createOscillator(), o2 = audioCtx.createOscillator(), g1 = audioCtx.createGain(), g2 = audioCtx.createGain();
