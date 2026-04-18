@@ -277,12 +277,11 @@ function pressKey(noteIndex) {
 function clearHighlights() { document.querySelectorAll('.white-key,.black-key').forEach(k => k.classList.remove('active-window')); }
 function updateHighlight() {
   clearHighlights();
-  if (activeNote && activeNote.waiting) {
+  if (activeNote) {
     const key = document.querySelector(`[data-note-index="${activeNote.noteIndex}"].white-key, [data-note-index="${activeNote.noteIndex}"].black-key`);
     if (key) key.classList.add('active-window');
-    activeNote.el.classList.add('waiting');
-  } else if (activeNote) {
-    activeNote.el.classList.remove('waiting');
+    if (activeNote.waiting) activeNote.el.classList.add('waiting');
+    else activeNote.el.classList.remove('waiting');
   }
 }
 function spawnSpark(keyEl, noteIndex) {
