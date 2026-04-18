@@ -229,9 +229,13 @@ function completeActiveNote() {
   progressIndex += 1;
   renderProgress();
   if (progressIndex >= SONG.notes.length) {
-    document.getElementById('hint').textContent = 'Nice. Song finished.';
+    document.getElementById('hint').textContent = 'Nice. Song finished. Restarting learn mode...';
     celebrate();
     songRunning = false;
+    songTimeout = setTimeout(() => {
+      songTimeout = null;
+      if (mode === 'song') startSong();
+    }, 1200);
   } else {
     document.getElementById('hint').textContent = `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
     songTimeout = setTimeout(() => { songTimeout = null; spawnCurrentSongNote(); }, 220);
@@ -322,7 +326,7 @@ function animate(ts) {
   updateHighlight();
   requestAnimationFrame(animate);
 }
-const KEY_MAP = { a:0, w:1, s:2, e:3, d:4, f:5, t:6, g:7, y:8, h:9, u:10, j:11, k:12 };
+const KEY_MAP = { a:0, w:1, s:2, e:3, d:4, f:5, t:6, g:7, y:8, h:9, u:10, j:11, k:12, '1':0, '2':2, '3':4, '4':5, '5':7, '6':9, '7':11, '8':12 };
 document.addEventListener('keydown', e => {
   if (e.repeat) return;
   const idx = KEY_MAP[e.key.toLowerCase()];
@@ -331,6 +335,9 @@ document.addEventListener('keydown', e => {
 });
 window.addEventListener('resize', () => { buildPianoAndLanes(); });
 buildPianoAndLanes(); renderProgress(); requestAnimationFrame(animate);
+setTimeout(() => {
+  if (!songRunning && mode === 'song') startSong();
+}, 250);
 </script>
 </body>
 </html>
