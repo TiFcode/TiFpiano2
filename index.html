@@ -3,35 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>TiFpiano2 🎹✨</title>
+<title>TiFpiano2 🎹🌟</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { width: 100%; min-height: 100%; overflow: hidden; font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif; }
+html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif; }
 body {
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,0.35), transparent 30%),
-    linear-gradient(180deg, #7fd9ff 0%, #77b8ff 35%, #a27bff 100%);
-  color: #183153;
+  background: linear-gradient(180deg, #72d9ff 0%, #89bbff 40%, #a77fff 100%);
+  color: #203050;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .scene {
-  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 12px 20px;
-  position: relative;
-  overflow: hidden;
 }
 
 .cloud {
   position: absolute;
-  background: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,.9);
   border-radius: 999px;
-  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.08));
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.08));
 }
 .cloud::before, .cloud::after {
   content: '';
@@ -39,350 +35,293 @@ body {
   background: inherit;
   border-radius: inherit;
 }
-.cloud.a { width: 120px; height: 42px; top: 24px; left: 16px; }
-.cloud.a::before { width: 52px; height: 52px; left: 14px; top: -18px; }
-.cloud.a::after { width: 60px; height: 60px; right: 10px; top: -24px; }
-.cloud.b { width: 100px; height: 36px; top: 46px; right: 16px; }
-.cloud.b::before { width: 44px; height: 44px; left: 12px; top: -16px; }
-.cloud.b::after { width: 48px; height: 48px; right: 10px; top: -18px; }
+.cloud.c1 { width: 120px; height: 40px; top: 24px; left: 18px; }
+.cloud.c1::before { width: 50px; height: 50px; left: 10px; top: -18px; }
+.cloud.c1::after { width: 58px; height: 58px; right: 10px; top: -24px; }
+.cloud.c2 { width: 110px; height: 36px; top: 54px; right: 18px; }
+.cloud.c2::before { width: 42px; height: 42px; left: 14px; top: -16px; }
+.cloud.c2::after { width: 50px; height: 50px; right: 12px; top: -20px; }
 
-.header {
-  text-align: center;
-  margin-top: 8px;
+.topbar {
   position: relative;
-  z-index: 2;
+  z-index: 4;
+  padding: 14px 12px 8px;
+  text-align: center;
 }
-.header h1 {
-  font-size: clamp(2rem, 6vw, 3rem);
+.topbar h1 {
   color: white;
-  text-shadow: 0 4px 12px rgba(73,54,145,0.35);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  text-shadow: 0 4px 14px rgba(62, 46, 140, .3);
 }
-.header p {
-  margin-top: 6px;
-  color: rgba(255,255,255,0.95);
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+.topbar p {
+  color: rgba(255,255,255,.95);
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: clamp(.9rem, 2.3vw, 1.05rem);
 }
 
-.top-panel {
-  width: min(960px, 100%);
+.controls {
+  position: relative;
+  z-index: 4;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
   justify-content: center;
-  align-items: center;
-  z-index: 2;
+  gap: 10px;
+  padding: 8px 12px 10px;
 }
-
-.mode-switch, .song-card, .mascot-card {
-  background: rgba(255,255,255,0.78);
-  border: 3px solid rgba(255,255,255,0.6);
-  border-radius: 26px;
-  box-shadow: 0 12px 30px rgba(65,52,143,0.16);
-  backdrop-filter: blur(4px);
-}
-
-.mode-switch {
-  display: flex;
-  gap: 8px;
-  padding: 8px;
-}
-.mode-btn {
+.btn {
   border: none;
   border-radius: 999px;
-  padding: 12px 16px;
-  font-size: clamp(0.85rem, 2.1vw, 1rem);
-  font-weight: 800;
-  color: #4b3f99;
-  background: rgba(123, 183, 255, 0.22);
+  padding: 11px 16px;
+  font-weight: 900;
   cursor: pointer;
-  transition: transform .15s ease, background .2s ease;
+  color: #5e3d91;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
-.mode-btn.active {
-  background: linear-gradient(135deg, #ffcf6b, #ff92b0);
-  color: white;
-  transform: translateY(-1px) scale(1.03);
-}
+.btn.primary { background: linear-gradient(135deg, #ffd86b, #ff9db5); color: white; }
+.btn.active { background: linear-gradient(135deg, #ffbf4f, #ff7ca6); color: white; }
 
-.song-card {
-  flex: 1 1 320px;
-  max-width: 440px;
-  padding: 14px 18px;
-}
-.song-card h2 {
-  font-size: 1.1rem;
-  color: #4a3c92;
-  margin-bottom: 8px;
-}
-.song-line {
-  font-size: 0.95rem;
-  color: #345;
-  line-height: 1.4;
-}
-.progress-row {
-  margin-top: 10px;
+.status {
+  position: relative;
+  z-index: 4;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 12px 10px;
 }
-.note-pill {
+.status-card {
+  background: rgba(255,255,255,.82);
+  border: 3px solid rgba(255,255,255,.55);
+  box-shadow: 0 10px 24px rgba(66, 50, 134, .14);
+  border-radius: 24px;
+  padding: 12px 16px;
+  min-width: min(760px, calc(100vw - 24px));
+  max-width: 900px;
+}
+.song-title {
+  font-weight: 900;
+  color: #4a3b91;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+}
+.hint {
+  color: #38506d;
+  font-weight: 700;
+  margin-top: 6px;
+  min-height: 1.4em;
+}
+.progress {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.pill {
   min-width: 38px;
   height: 38px;
+  border-radius: 999px;
   padding: 0 10px;
-  border-radius: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #eef5ff;
-  border: 2px solid #d7e7ff;
-  color: #4b3f99;
   font-weight: 900;
-  transition: all .18s ease;
+  background: #edf4ff;
+  border: 2px solid #d8e8ff;
+  color: #5242a0;
+  transition: all .16s ease;
 }
-.note-pill.current {
-  background: #ffe69c;
-  border-color: #ffc64d;
-  transform: scale(1.08);
-  box-shadow: 0 0 0 5px rgba(255,198,77,0.18);
-}
-.note-pill.done {
-  background: #9be68f;
-  border-color: #55c569;
-  color: #1f5c2b;
-}
-.note-pill.wrong {
-  background: #ffb4b4;
-  border-color: #ff7070;
-  animation: wiggle .22s linear 2;
-}
+.pill.done { background: #99e68c; border-color: #59c767; color: #205d2f; }
+.pill.current { background: #ffe28d; border-color: #ffbf47; transform: scale(1.08); box-shadow: 0 0 0 5px rgba(255,191,71,.18); }
+.pill.miss { background: #ffb8b8; border-color: #ff7a7a; }
 
-.mascot-card {
-  width: min(220px, 100%);
-  padding: 14px 14px 10px;
-  text-align: center;
-}
-.mascot {
-  font-size: clamp(4rem, 12vw, 6rem);
-  line-height: 1;
-  transition: transform .18s ease;
-}
-.mascot.pop { transform: scale(1.18) rotate(-4deg); }
-.mascot-text {
-  margin-top: 6px;
-  font-size: 1rem;
-  color: #4a3c92;
-  font-weight: 800;
-}
-.mascot-sub {
-  margin-top: 4px;
-  font-size: 0.88rem;
-  color: #486;
-}
-
-.stage {
-  width: min(1000px, 100%);
-  flex: 1;
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  padding: 12px 0 4px;
-  position: relative;
-  z-index: 2;
-}
-
-.piano-shell {
-  width: min(980px, 100%);
-  border-radius: 34px;
-  padding: 14px 14px 18px;
-  background: linear-gradient(180deg, #ff6fae 0%, #ff8f58 100%);
-  box-shadow: 0 18px 40px rgba(84,48,109,0.24);
-  border: 6px solid rgba(255,255,255,0.3);
-}
-
-.controls-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-.brand {
-  color: white;
-  font-size: clamp(1rem, 2.8vw, 1.35rem);
-  font-weight: 900;
-  letter-spacing: .04em;
-}
-.btn-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.small-btn {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.9);
-  color: #6b3c6f;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-.small-btn.primary { background: #fff3a6; }
-.small-btn.recording { background: #ff4d6d; color: white; }
-
-.keyboard-wrap {
-  position: relative;
-  background: #f7b36c;
-  border-radius: 26px;
-  padding: 14px 14px 12px;
-  overflow: hidden;
-}
-.keyboard {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-  height: min(44vh, 330px);
-}
-.key {
+.playfield {
   position: relative;
   flex: 1;
-  border-radius: 0 0 24px 24px;
+  margin: 0 auto;
+  width: min(980px, calc(100vw - 12px));
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 12px 6px;
-  cursor: pointer;
-  transition: transform .06s ease, filter .12s ease;
-  box-shadow: inset 0 -10px 0 rgba(0,0,0,0.06), 0 8px 0 rgba(0,0,0,0.08);
-}
-.key.white { height: 100%; color: #fff; border: 3px solid rgba(255,255,255,0.35); }
-.key.black {
-  height: 62%;
-  flex: 0.62;
-  margin: 0 -2.4%;
-  z-index: 2;
-  border-radius: 0 0 18px 18px;
-  border: 3px solid rgba(255,255,255,0.18);
-  color: #f7f8ff;
-}
-.key.pressed { transform: translateY(4px) scaleY(.985); filter: brightness(1.08); }
-.key-label {
-  font-size: clamp(0.72rem, 1.8vw, 0.92rem);
-  font-weight: 900;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
-}
-.key-icon {
-  font-size: clamp(1.2rem, 3.2vw, 2rem);
-  margin-bottom: 10px;
-}
-.key-glow {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: 10px;
-  height: 22%;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.38), transparent);
-  pointer-events: none;
 }
 
-.hint {
-  text-align: center;
-  color: rgba(255,255,255,0.95);
-  font-weight: 700;
-  margin-top: 12px;
-  min-height: 24px;
+.note-area {
+  position: relative;
+  flex: 1;
+  margin: 0 4px;
+  border-radius: 28px 28px 18px 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02)),
+    linear-gradient(180deg, rgba(82, 72, 178, .12), rgba(94, 178, 255, .08));
+  box-shadow: inset 0 -12px 24px rgba(255,255,255,.08);
+}
+.lanes {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 6px;
+  padding: 0 10px;
+}
+.lane {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
+  border-left: 1px solid rgba(255,255,255,.2);
+  border-right: 1px solid rgba(255,255,255,.14);
+}
+.target-line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 12px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+  box-shadow: 0 0 18px rgba(255,255,255,.5);
+}
+.falling-note {
+  position: absolute;
+  width: calc(100% - 10px);
+  left: 5px;
+  height: 46px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
+  box-shadow: 0 10px 18px rgba(0,0,0,.15), inset 0 4px 10px rgba(255,255,255,.18);
+}
+.falling-note.hit { transform: scale(1.08); }
+.falling-note.missed { filter: grayscale(.2) brightness(.8); opacity: .55; }
+
+.piano-shell {
+  position: relative;
+  z-index: 3;
+  margin-top: -8px;
+  background: linear-gradient(180deg, #ff74ac 0%, #ff8d55 100%);
+  border-radius: 30px 30px 0 0;
+  padding: 14px 12px 14px;
+  border: 6px solid rgba(255,255,255,.28);
+  box-shadow: 0 -8px 18px rgba(58, 44, 124, .14), 0 16px 36px rgba(58, 44, 124, .22);
+}
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: white;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+.brand-left { font-size: clamp(1rem, 2.4vw, 1.25rem); }
+.brand-right { font-size: clamp(.82rem, 1.9vw, .95rem); opacity: .95; }
+.keyboard {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  height: min(27vh, 210px);
+}
+.key {
+  flex: 1;
+  position: relative;
+  border-radius: 0 0 24px 24px;
+  border: 3px solid rgba(255,255,255,.36);
+  box-shadow: inset 0 -12px 0 rgba(0,0,0,.08), 0 8px 0 rgba(0,0,0,.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 6px;
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
+  color: white;
+}
+.key.black {
+  height: 62%;
+  flex: .62;
+  margin: 0 -2.4%;
+  z-index: 5;
+  align-self: flex-start;
+  border-radius: 0 0 18px 18px;
+}
+.key.active-window {
+  box-shadow: inset 0 -12px 0 rgba(0,0,0,.08), 0 0 0 6px rgba(255,255,255,.22), 0 0 24px rgba(255,255,255,.5), 0 10px 0 rgba(0,0,0,.08);
+  filter: brightness(1.1);
+}
+.key.pressed { transform: translateY(4px) scaleY(.985); }
+.key-label { font-weight: 900; font-size: clamp(.72rem, 1.8vw, .95rem); text-shadow: 0 1px 2px rgba(0,0,0,.25); }
+.key-icon { font-size: clamp(1.15rem, 3vw, 1.8rem); margin-bottom: 8px; }
+.key-gloss {
+  position: absolute;
+  left: 10px; right: 10px; top: 10px; height: 22%;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.38), transparent);
 }
 
 .spark {
   position: fixed;
   pointer-events: none;
+  z-index: 30;
   font-size: 1.4rem;
-  animation: sparkle 900ms ease-out forwards;
-  z-index: 50;
+  animation: fly 850ms ease-out forwards;
 }
-
-.footer-note {
-  z-index: 2;
-  color: rgba(255,255,255,0.95);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
-  text-align: center;
-  font-size: 0.92rem;
-  margin-top: 6px;
-}
-
-@keyframes sparkle {
+@keyframes fly {
   0% { opacity: 1; transform: translateY(0) scale(.8) rotate(0deg); }
-  100% { opacity: 0; transform: translateY(-80px) scale(1.5) rotate(18deg); }
-}
-@keyframes wiggle {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  100% { opacity: 0; transform: translateY(-78px) scale(1.4) rotate(16deg); }
 }
 
 @media (max-width: 760px) {
-  .scene { padding: 10px 8px 14px; }
-  .piano-shell { padding: 12px 10px 14px; border-radius: 28px; }
-  .keyboard-wrap { padding: 10px 10px 8px; }
-  .keyboard { height: min(42vh, 280px); gap: 4px; }
+  .controls { gap: 8px; }
+  .btn { padding: 10px 14px; font-size: .92rem; }
+  .status-card { min-width: 0; width: 100%; }
+  .playfield { width: calc(100vw - 8px); }
+  .note-area { border-radius: 22px 22px 14px 14px; }
+  .keyboard { height: min(25vh, 180px); gap: 4px; }
   .key.black { margin: 0 -3%; }
-  .mode-switch { width: 100%; justify-content: center; }
-  .song-card { max-width: none; }
 }
 </style>
 </head>
 <body>
 <div class="scene">
-  <div class="cloud a"></div>
-  <div class="cloud b"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
 
-  <div class="header">
+  <div class="topbar">
     <h1>🎹 TiFpiano2</h1>
-    <p>Colorful toy piano • free play + guided songs</p>
+    <p>Falling notes • glowing keys • Twinkle first</p>
   </div>
 
-  <div class="top-panel">
-    <div class="mode-switch">
-      <button class="mode-btn active" id="mode-free" onclick="setMode('free')">🎵 Free Play</button>
-      <button class="mode-btn" id="mode-song" onclick="setMode('song')">🌟 Learn Song</button>
-      <button class="mode-btn" id="mode-record" onclick="setMode('record')">⏺️ Record</button>
-    </div>
+  <div class="controls">
+    <button class="btn active" id="mode-song" onclick="setMode('song')">🌟 Learn Song</button>
+    <button class="btn" id="mode-free" onclick="setMode('free')">🎵 Free Play</button>
+    <button class="btn primary" onclick="startSong()">▶️ Start</button>
+    <button class="btn" onclick="stopSong()">⏹️ Stop</button>
+    <button class="btn" onclick="toggleAuto()" id="autoBtn">🤖 Auto: Off</button>
+  </div>
 
-    <div class="song-card" id="songCard">
-      <h2>First song: Twinkle Twinkle ⭐</h2>
-      <div class="song-line" id="songLine">Press Learn Song, then follow the glowing notes one by one.</div>
-      <div class="progress-row" id="progressRow"></div>
-    </div>
-
-    <div class="mascot-card">
-      <div class="mascot" id="mascot">🌈</div>
-      <div class="mascot-text" id="mascotText">Ready to play!</div>
-      <div class="mascot-sub" id="mascotSub">Tap any colorful key.</div>
+  <div class="status">
+    <div class="status-card">
+      <div class="song-title" id="songTitle">🌟 Twinkle Twinkle Little Star</div>
+      <div class="hint" id="hint">Notes fall from above. When one reaches the line, press that key.</div>
+      <div class="progress" id="progress"></div>
     </div>
   </div>
 
-  <div class="stage">
+  <div class="playfield">
+    <div class="note-area" id="noteArea">
+      <div class="lanes" id="lanes"></div>
+      <div class="target-line"></div>
+    </div>
+
     <div class="piano-shell">
-      <div class="controls-row">
-        <div class="brand">✨ Rainbow Piano ✨</div>
-        <div class="btn-row">
-          <button class="small-btn primary" onclick="playDemo()">▶️ Demo Song</button>
-          <button class="small-btn" id="recordBtn" onclick="toggleRecord()">⏺️ Record</button>
-          <button class="small-btn" onclick="playRecording()">🎧 Play Recording</button>
-          <button class="small-btn" onclick="clearRecording()">🧹 Clear</button>
-        </div>
+      <div class="brand-row">
+        <div class="brand-left">✨ Rainbow Piano ✨</div>
+        <div class="brand-right">A S D F G H J K keys work too</div>
       </div>
-
-      <div class="keyboard-wrap">
-        <div class="keyboard" id="keyboard"></div>
-      </div>
-      <div class="hint" id="hint">Tap the piano keys or use A S D F G H J K</div>
+      <div class="keyboard" id="keyboard"></div>
     </div>
   </div>
-
-  <div class="footer-note">Built for tiny fingers, bright sounds, and Twinkle Twinkle first. 🌟</div>
 </div>
 
 <script>
@@ -394,296 +333,315 @@ function ensureAudio() {
 }
 
 const NOTES = [
-  { name: 'C', label: 'Do', freq: 261.63, color: '#ff5c8a', icon: '🐻', type: 'white' },
-  { name: 'C#', label: 'Do#', freq: 277.18, color: '#8d57ff', icon: '⭐', type: 'black' },
-  { name: 'D', label: 'Re', freq: 293.66, color: '#ff8a47', icon: '🦊', type: 'white' },
-  { name: 'D#', label: 'Re#', freq: 311.13, color: '#5f7cff', icon: '☁️', type: 'black' },
-  { name: 'E', label: 'Mi', freq: 329.63, color: '#ffd64c', icon: '🐥', type: 'white' },
-  { name: 'F', label: 'Fa', freq: 349.23, color: '#62d96b', icon: '🐸', type: 'white' },
-  { name: 'F#', label: 'Fa#', freq: 369.99, color: '#24c7c9', icon: '💧', type: 'black' },
-  { name: 'G', label: 'Sol', freq: 392.0, color: '#45b6ff', icon: '🐳', type: 'white' },
-  { name: 'G#', label: 'Sol#', freq: 415.30, color: '#4d6dff', icon: '🌙', type: 'black' },
-  { name: 'A', label: 'La', freq: 440.0, color: '#9e6bff', icon: '🦄', type: 'white' },
+  { name: 'C', label: 'Do', freq: 261.63, color: '#ff5f8e', icon: '🐻', type: 'white' },
+  { name: 'C#', label: 'Do#', freq: 277.18, color: '#895dff', icon: '⭐', type: 'black' },
+  { name: 'D', label: 'Re', freq: 293.66, color: '#ff9648', icon: '🦊', type: 'white' },
+  { name: 'D#', label: 'Re#', freq: 311.13, color: '#5677ff', icon: '☁️', type: 'black' },
+  { name: 'E', label: 'Mi', freq: 329.63, color: '#ffd24c', icon: '🐥', type: 'white' },
+  { name: 'F', label: 'Fa', freq: 349.23, color: '#5ed86a', icon: '🐸', type: 'white' },
+  { name: 'F#', label: 'Fa#', freq: 369.99, color: '#1fc7c8', icon: '💧', type: 'black' },
+  { name: 'G', label: 'Sol', freq: 392.00, color: '#45b7ff', icon: '🐳', type: 'white' },
+  { name: 'G#', label: 'Sol#', freq: 415.30, color: '#4868ff', icon: '🌙', type: 'black' },
+  { name: 'A', label: 'La', freq: 440.00, color: '#9f6dff', icon: '🦄', type: 'white' },
   { name: 'A#', label: 'La#', freq: 466.16, color: '#d04dff', icon: '✨', type: 'black' },
-  { name: 'B', label: 'Si', freq: 493.88, color: '#ff64b1', icon: '🦋', type: 'white' },
-  { name: 'C2', label: 'Do2', freq: 523.25, color: '#ff7a59', icon: '🌈', type: 'white' }
+  { name: 'B', label: 'Si', freq: 493.88, color: '#ff66b3', icon: '🦋', type: 'white' },
+  { name: 'C2', label: 'Do2', freq: 523.25, color: '#ff7a5b', icon: '🌈', type: 'white' }
 ];
 
-const SONGS = [
-  {
-    name: 'Twinkle Twinkle Little Star',
-    emoji: '🌟',
-    notes: [0,0,7,7,9,9,7, 5,5,4,4,2,2,0],
-    line: 'C C G G A A G • F F E E D D C'
-  },
-  {
-    name: 'Mary Had a Little Lamb',
-    emoji: '🐑',
-    notes: [4,2,0,2,4,4,4, 2,2,2, 4,7,7],
-    line: 'E D C D E E E • D D D • E G G'
-  }
-];
+const SONG = {
+  name: 'Twinkle Twinkle Little Star',
+  notes: [0,0,7,7,9,9,7, 5,5,4,4,2,2,0],
+};
 
-let currentMode = 'free';
-let currentSongIndex = 0;
-let currentProgress = 0;
-let isRecording = false;
-let recording = [];
-let recordStart = 0;
-let demoPlaying = false;
-
-function buildKeyboard() {
-  const keyboard = document.getElementById('keyboard');
-  keyboard.innerHTML = '';
-  NOTES.forEach((note, index) => {
-    const key = document.createElement('button');
-    key.className = `key ${note.type}`;
-    key.style.background = note.type === 'white'
-      ? `linear-gradient(180deg, ${shade(note.color, 14)} 0%, ${note.color} 70%, ${shade(note.color, -14)} 100%)`
-      : `linear-gradient(180deg, ${shade(note.color, -16)} 0%, ${note.color} 80%, ${shade(note.color, -28)} 100%)`;
-    key.dataset.index = index;
-    key.innerHTML = `<div class="key-glow"></div><div class="key-icon">${note.icon}</div><div class="key-label">${note.label}</div>`;
-    key.addEventListener('pointerdown', e => { e.preventDefault(); playNote(index); });
-    key.addEventListener('touchstart', e => { e.preventDefault(); playNote(index); }, { passive: false });
-    keyboard.appendChild(key);
-  });
-}
+let mode = 'song';
+let autoPlay = false;
+let songRunning = false;
+let activeNotes = [];
+let songTimers = [];
+let spawnIndex = 0;
+let progressIndex = 0;
+let missFlash = false;
+const noteDuration = 3600;
+const targetWindowPx = 54;
+let lastFrame = 0;
 
 function shade(hex, amt) {
-  const v = hex.replace('#', '');
-  const n = parseInt(v, 16);
+  const n = parseInt(hex.slice(1), 16);
   let r = (n >> 16) + amt;
-  let g = ((n >> 8) & 0xff) + amt;
-  let b = (n & 0xff) + amt;
+  let g = ((n >> 8) & 255) + amt;
+  let b = (n & 255) + amt;
   r = Math.max(0, Math.min(255, r));
   g = Math.max(0, Math.min(255, g));
   b = Math.max(0, Math.min(255, b));
   return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 }
 
-function playTone(freq, duration = 0.55) {
+function buildLanes() {
+  const lanes = document.getElementById('lanes');
+  lanes.innerHTML = '';
+  NOTES.forEach(() => {
+    const lane = document.createElement('div');
+    lane.className = 'lane';
+    lanes.appendChild(lane);
+  });
+}
+
+function buildKeyboard() {
+  const kb = document.getElementById('keyboard');
+  kb.innerHTML = '';
+  NOTES.forEach((note, index) => {
+    const key = document.createElement('button');
+    key.className = `key ${note.type}`;
+    key.dataset.index = index;
+    key.style.background = `linear-gradient(180deg, ${shade(note.color, 18)}, ${note.color} 70%, ${shade(note.color, -18)})`;
+    key.innerHTML = `<div class="key-gloss"></div><div class="key-icon">${note.icon}</div><div class="key-label">${note.label}</div>`;
+    key.addEventListener('pointerdown', e => { e.preventDefault(); handleInput(index); });
+    key.addEventListener('touchstart', e => { e.preventDefault(); handleInput(index); }, { passive: false });
+    kb.appendChild(key);
+  });
+}
+
+function renderProgress() {
+  const progress = document.getElementById('progress');
+  progress.innerHTML = '';
+  SONG.notes.forEach((noteIndex, idx) => {
+    const pill = document.createElement('div');
+    pill.className = 'pill';
+    if (idx < progressIndex) pill.classList.add('done');
+    if (idx === progressIndex) pill.classList.add('current');
+    if (missFlash && idx === progressIndex) pill.classList.add('miss');
+    pill.textContent = NOTES[noteIndex].label;
+    progress.appendChild(pill);
+  });
+}
+
+function setMode(next) {
+  mode = next;
+  document.getElementById('mode-song').classList.toggle('active', next === 'song');
+  document.getElementById('mode-free').classList.toggle('active', next === 'free');
+  stopSong();
+  if (next === 'free') {
+    document.getElementById('hint').textContent = 'Free play mode. Tap any key.';
+  } else {
+    document.getElementById('hint').textContent = 'Notes fall from above. When one reaches the line, press that key.';
+  }
+}
+
+function toggleAuto() {
+  autoPlay = !autoPlay;
+  document.getElementById('autoBtn').textContent = `🤖 Auto: ${autoPlay ? 'On' : 'Off'}`;
+}
+
+function startSong() {
+  if (mode !== 'song') {
+    setMode('song');
+  }
+  stopSong();
+  songRunning = true;
+  spawnIndex = 0;
+  progressIndex = 0;
+  renderProgress();
+  document.getElementById('hint').textContent = 'Go. Hit each key when the falling note reaches the line.';
+
+  SONG.notes.forEach((noteIndex, idx) => {
+    const timer = setTimeout(() => spawnNote(noteIndex, idx), idx * 900);
+    songTimers.push(timer);
+  });
+}
+
+function stopSong() {
+  songRunning = false;
+  songTimers.forEach(clearTimeout);
+  songTimers = [];
+  activeNotes.forEach(n => n.el.remove());
+  activeNotes = [];
+  clearKeyHighlights();
+}
+
+function spawnNote(noteIndex, sequenceIndex) {
+  if (!songRunning) return;
+  const lanes = document.querySelectorAll('.lane');
+  const lane = lanes[noteIndex];
+  if (!lane) return;
+  const note = NOTES[noteIndex];
+  const el = document.createElement('div');
+  el.className = 'falling-note';
+  el.style.background = `linear-gradient(180deg, ${shade(note.color, 14)}, ${note.color})`;
+  el.innerHTML = `${note.icon} ${note.label}`;
+  lane.appendChild(el);
+
+  const obj = {
+    noteIndex,
+    sequenceIndex,
+    lane,
+    el,
+    start: performance.now(),
+    hit: false,
+    missed: false,
+  };
+  activeNotes.push(obj);
+}
+
+function handleInput(noteIndex) {
+  playTone(NOTES[noteIndex].freq);
+  flashKey(noteIndex, true);
+
+  if (mode === 'free') return;
+
+  const candidate = activeNotes.find(n => !n.hit && !n.missed && n.noteIndex === noteIndex && inHitWindow(n));
+  if (candidate) {
+    candidate.hit = true;
+    candidate.el.classList.add('hit');
+    candidate.el.style.opacity = '0';
+    setTimeout(() => candidate.el.remove(), 140);
+    activeNotes = activeNotes.filter(n => n !== candidate);
+    if (candidate.sequenceIndex === progressIndex) {
+      progressIndex += 1;
+      renderProgress();
+      document.getElementById('hint').textContent = progressIndex >= SONG.notes.length
+        ? 'Nice. Song finished.'
+        : `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
+      if (progressIndex >= SONG.notes.length) {
+        celebrate();
+        songRunning = false;
+      }
+    }
+  } else if (songRunning) {
+    showMiss();
+  }
+}
+
+function inHitWindow(noteObj) {
+  const laneRect = noteObj.lane.getBoundingClientRect();
+  const noteRect = noteObj.el.getBoundingClientRect();
+  const targetY = laneRect.bottom - 35;
+  const noteCenter = noteRect.top + noteRect.height / 2;
+  return Math.abs(noteCenter - targetY) <= targetWindowPx;
+}
+
+function flashKey(index, pressed = false) {
+  const key = document.querySelector(`.key[data-index="${index}"]`);
+  if (!key) return;
+  key.classList.add('pressed');
+  if (pressed) spawnSpark(key, NOTES[index].icon, NOTES[index].color);
+  setTimeout(() => key.classList.remove('pressed'), 110);
+}
+
+function clearKeyHighlights() {
+  document.querySelectorAll('.key').forEach(k => k.classList.remove('active-window'));
+}
+
+function showMiss() {
+  missFlash = true;
+  renderProgress();
+  document.getElementById('hint').textContent = 'Too early or wrong key. Wait for the note to reach the line.';
+  setTimeout(() => {
+    missFlash = false;
+    renderProgress();
+  }, 220);
+}
+
+function celebrate() {
+  for (let i = 0; i < 16; i++) {
+    setTimeout(() => {
+      const s = document.createElement('div');
+      s.className = 'spark';
+      s.textContent = ['✨','🌟','🎉','🎵'][Math.floor(Math.random() * 4)];
+      s.style.left = `${Math.random() * window.innerWidth}px`;
+      s.style.top = `${window.innerHeight * 0.45 + Math.random() * 80}px`;
+      s.style.color = ['#ffd84d','#ff7ea6','#7fe1ff','#9ce68e'][Math.floor(Math.random() * 4)];
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 850);
+    }, i * 60);
+  }
+}
+
+function spawnSpark(sourceEl, icon, color) {
+  const rect = sourceEl.getBoundingClientRect();
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.textContent = icon;
+  s.style.left = `${rect.left + rect.width / 2 - 8}px`;
+  s.style.top = `${rect.top + 10}px`;
+  s.style.color = color;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 850);
+}
+
+function playTone(freq, duration = .42) {
   ensureAudio();
   const now = audioCtx.currentTime;
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  const bell = audioCtx.createOscillator();
-  const bellGain = audioCtx.createGain();
-
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(freq, now);
-  osc.frequency.exponentialRampToValueAtTime(freq * 1.005, now + 0.12);
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.exponentialRampToValueAtTime(0.25, now + 0.02);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-  bell.type = 'sine';
-  bell.frequency.setValueAtTime(freq * 2, now);
-  bellGain.gain.setValueAtTime(0.12, now);
-  bellGain.gain.exponentialRampToValueAtTime(0.0001, now + duration * 0.7);
-
-  osc.connect(gain).connect(audioCtx.destination);
-  bell.connect(bellGain).connect(audioCtx.destination);
-  osc.start(now);
-  bell.start(now);
-  osc.stop(now + duration + 0.05);
-  bell.stop(now + duration + 0.05);
+  const o1 = audioCtx.createOscillator();
+  const o2 = audioCtx.createOscillator();
+  const g1 = audioCtx.createGain();
+  const g2 = audioCtx.createGain();
+  o1.type = 'triangle';
+  o1.frequency.setValueAtTime(freq, now);
+  g1.gain.setValueAtTime(.0001, now);
+  g1.gain.exponentialRampToValueAtTime(.23, now + .02);
+  g1.gain.exponentialRampToValueAtTime(.0001, now + duration);
+  o2.type = 'sine';
+  o2.frequency.setValueAtTime(freq * 2, now);
+  g2.gain.setValueAtTime(.11, now);
+  g2.gain.exponentialRampToValueAtTime(.0001, now + duration * .65);
+  o1.connect(g1).connect(audioCtx.destination);
+  o2.connect(g2).connect(audioCtx.destination);
+  o1.start(now); o2.start(now);
+  o1.stop(now + duration + .05); o2.stop(now + duration + .05);
 }
 
-function playNote(index, fromDemo = false) {
-  const note = NOTES[index];
-  playTone(note.freq);
+function animate(ts) {
+  if (!lastFrame) lastFrame = ts;
+  clearKeyHighlights();
+  const lanes = document.querySelectorAll('.lane');
 
-  const key = document.querySelector(`.key[data-index="${index}"]`);
-  if (key) {
-    key.classList.add('pressed');
-    setTimeout(() => key.classList.remove('pressed'), 120);
-    spawnSpark(note.icon, key, note.color);
-  }
+  activeNotes = activeNotes.filter(noteObj => {
+    const laneRect = noteObj.lane.getBoundingClientRect();
+    const areaRect = document.getElementById('noteArea').getBoundingClientRect();
+    const progress = Math.min(1, (ts - noteObj.start) / noteDuration);
+    const top = progress * (areaRect.height - 70);
+    noteObj.el.style.top = `${top}px`;
 
-  const mascot = document.getElementById('mascot');
-  mascot.textContent = note.icon;
-  mascot.classList.remove('pop');
-  void mascot.offsetWidth;
-  mascot.classList.add('pop');
-  document.getElementById('mascotText').textContent = `${note.label} • ${note.name}`;
-  document.getElementById('mascotSub').textContent = fromDemo ? 'Demo is playing…' : 'Nice! Keep going.';
-  document.getElementById('hint').textContent = `${note.label} rings out in ${note.color}.`;
-
-  if (isRecording && !fromDemo) {
-    recording.push({ index, time: Date.now() - recordStart });
-  }
-
-  if (currentMode === 'song' && !fromDemo) {
-    checkSongProgress(index);
-  }
-}
-
-function spawnSpark(icon, source, color) {
-  const rect = source.getBoundingClientRect();
-  for (let i = 0; i < 2; i++) {
-    const spark = document.createElement('div');
-    spark.className = 'spark';
-    spark.textContent = i === 0 ? icon : '✨';
-    spark.style.left = `${rect.left + rect.width / 2 + (Math.random() * 24 - 12)}px`;
-    spark.style.top = `${rect.top + rect.height / 4}px`;
-    spark.style.color = color;
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 900);
-  }
-}
-
-function setMode(mode) {
-  currentMode = mode;
-  document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(`mode-${mode}`).classList.add('active');
-
-  if (mode === 'song') {
-    loadSong(currentSongIndex);
-    document.getElementById('hint').textContent = 'Follow the highlighted notes in order.';
-  } else if (mode === 'record') {
-    document.getElementById('songLine').textContent = 'Tap Record, play your tune, then play it back.';
-    document.getElementById('progressRow').innerHTML = '';
-    document.getElementById('hint').textContent = 'Recording mode is ready.';
-  } else {
-    document.getElementById('songLine').textContent = 'Free play mode. Make noise. Preferably musical noise.';
-    document.getElementById('progressRow').innerHTML = '';
-    document.getElementById('hint').textContent = 'Tap the piano keys or use A S D F G H J K';
-  }
-}
-
-function loadSong(songIndex) {
-  currentSongIndex = songIndex;
-  currentProgress = 0;
-  const song = SONGS[songIndex];
-  document.querySelector('#songCard h2').textContent = `${song.emoji} ${song.name}`;
-  document.getElementById('songLine').textContent = song.line;
-  renderSongProgress();
-}
-
-function renderSongProgress(wrong = false) {
-  const song = SONGS[currentSongIndex];
-  const row = document.getElementById('progressRow');
-  row.innerHTML = '';
-  song.notes.forEach((noteIndex, idx) => {
-    const pill = document.createElement('div');
-    pill.className = 'note-pill';
-    if (idx < currentProgress) pill.classList.add('done');
-    if (idx === currentProgress) pill.classList.add('current');
-    if (wrong && idx === currentProgress) pill.classList.add('wrong');
-    pill.textContent = NOTES[noteIndex].label;
-    row.appendChild(pill);
-  });
-}
-
-function checkSongProgress(index) {
-  const song = SONGS[currentSongIndex];
-  if (index === song.notes[currentProgress]) {
-    currentProgress += 1;
-    if (currentProgress >= song.notes.length) {
-      renderSongProgress();
-      celebrateSong(song);
-      setTimeout(() => {
-        currentSongIndex = (currentSongIndex + 1) % SONGS.length;
-        loadSong(currentSongIndex);
-      }, 1400);
-    } else {
-      renderSongProgress();
+    const targetY = laneRect.height - 35;
+    const noteCenter = top + 23;
+    if (Math.abs(noteCenter - targetY) <= targetWindowPx) {
+      const key = document.querySelector(`.key[data-index="${noteObj.noteIndex}"]`);
+      if (key) key.classList.add('active-window');
+      if (autoPlay && !noteObj.hit && noteObj.sequenceIndex === progressIndex && Math.abs(noteCenter - targetY) <= 10) {
+        handleInput(noteObj.noteIndex);
+      }
     }
-  } else {
-    renderSongProgress(true);
-    document.getElementById('hint').textContent = 'Oops — try the glowing note again.';
-  }
-}
 
-function celebrateSong(song) {
-  document.getElementById('mascot').textContent = '🎉';
-  document.getElementById('mascotText').textContent = 'Song complete!';
-  document.getElementById('mascotSub').textContent = `${song.name} finished.`;
-  document.getElementById('hint').textContent = `Nice. ${song.name} is done.`;
-  for (let i = 0; i < 14; i++) {
-    setTimeout(() => {
-      const spark = document.createElement('div');
-      spark.className = 'spark';
-      spark.textContent = ['✨','🌟','🎉','🎵'][Math.floor(Math.random() * 4)];
-      spark.style.left = `${Math.random() * window.innerWidth}px`;
-      spark.style.top = `${window.innerHeight * 0.35 + Math.random() * 120}px`;
-      spark.style.color = ['#ffd84d', '#ff6fae', '#7fe0ff', '#9be68f'][Math.floor(Math.random() * 4)];
-      document.body.appendChild(spark);
-      setTimeout(() => spark.remove(), 900);
-    }, i * 70);
-  }
-}
-
-function playDemo() {
-  if (demoPlaying) return;
-  demoPlaying = true;
-  const song = SONGS[currentSongIndex];
-  document.getElementById('hint').textContent = `Playing demo: ${song.name}`;
-  song.notes.forEach((noteIndex, idx) => {
-    setTimeout(() => {
-      playNote(noteIndex, true);
-      if (idx === song.notes.length - 1) {
-        setTimeout(() => {
-          demoPlaying = false;
-          document.getElementById('hint').textContent = 'Now you try it.';
-        }, 300);
+    if (progress >= 1 && !noteObj.hit) {
+      noteObj.missed = true;
+      noteObj.el.classList.add('missed');
+      noteObj.el.remove();
+      if (noteObj.sequenceIndex === progressIndex && songRunning) {
+        showMiss();
       }
-    }, idx * 520);
+      return false;
+    }
+    return true;
   });
-}
 
-function toggleRecord() {
-  isRecording = !isRecording;
-  const btn = document.getElementById('recordBtn');
-  if (isRecording) {
-    recording = [];
-    recordStart = Date.now();
-    btn.classList.add('recording');
-    btn.textContent = '⏹️ Stop';
-    document.getElementById('hint').textContent = 'Recording… play your tune.';
-  } else {
-    btn.classList.remove('recording');
-    btn.textContent = '⏺️ Record';
-    document.getElementById('hint').textContent = `Saved ${recording.length} notes.`;
-  }
-}
-
-function playRecording() {
-  if (!recording.length) {
-    document.getElementById('hint').textContent = 'No recording yet.';
-    return;
-  }
-  if (isRecording) toggleRecord();
-  document.getElementById('hint').textContent = 'Playing your recording…';
-  recording.forEach((item, idx) => {
-    setTimeout(() => {
-      playNote(item.index, true);
-      if (idx === recording.length - 1) {
-        setTimeout(() => document.getElementById('hint').textContent = 'Recording finished.', 300);
-      }
-    }, item.time);
-  });
-}
-
-function clearRecording() {
-  if (isRecording) toggleRecord();
-  recording = [];
-  document.getElementById('hint').textContent = 'Recording cleared.';
+  requestAnimationFrame(animate);
 }
 
 const KEY_MAP = { a:0, w:1, s:2, e:3, d:4, f:5, t:6, g:7, y:8, h:9, u:10, j:11, k:12 };
 document.addEventListener('keydown', e => {
   if (e.repeat) return;
-  const index = KEY_MAP[e.key.toLowerCase()];
-  if (index !== undefined) playNote(index);
-  if (e.key === ' ') {
+  const idx = KEY_MAP[e.key.toLowerCase()];
+  if (idx !== undefined) handleInput(idx);
+  if (e.code === 'Space') {
     e.preventDefault();
-    currentMode === 'song' ? playDemo() : toggleRecord();
+    songRunning ? stopSong() : startSong();
   }
 });
 
+buildLanes();
 buildKeyboard();
-loadSong(0);
+renderProgress();
+requestAnimationFrame(animate);
 </script>
 </body>
 </html>
