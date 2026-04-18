@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>TiFpiano2 🎹🌟</title>
+<title>TiFpiano2 🎹</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif; }
 body {
-  background: linear-gradient(180deg, #72d9ff 0%, #89bbff 40%, #a77fff 100%);
-  color: #203050;
+  background: linear-gradient(180deg, #7ed8ff 0%, #92b7ff 40%, #a881ff 100%);
   user-select: none;
   -webkit-user-select: none;
 }
@@ -29,116 +28,72 @@ body {
   border-radius: 999px;
   filter: drop-shadow(0 8px 10px rgba(0,0,0,.08));
 }
-.cloud::before, .cloud::after {
-  content: '';
-  position: absolute;
-  background: inherit;
-  border-radius: inherit;
-}
-.cloud.c1 { width: 120px; height: 40px; top: 24px; left: 18px; }
-.cloud.c1::before { width: 50px; height: 50px; left: 10px; top: -18px; }
-.cloud.c1::after { width: 58px; height: 58px; right: 10px; top: -24px; }
-.cloud.c2 { width: 110px; height: 36px; top: 54px; right: 18px; }
-.cloud.c2::before { width: 42px; height: 42px; left: 14px; top: -16px; }
-.cloud.c2::after { width: 50px; height: 50px; right: 12px; top: -20px; }
+.cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: inherit; }
+.cloud.c1 { width: 118px; height: 40px; top: 22px; left: 18px; }
+.cloud.c1::before { width: 48px; height: 48px; left: 12px; top: -16px; }
+.cloud.c1::after { width: 56px; height: 56px; right: 10px; top: -22px; }
+.cloud.c2 { width: 108px; height: 36px; top: 54px; right: 18px; }
+.cloud.c2::before { width: 42px; height: 42px; left: 12px; top: -16px; }
+.cloud.c2::after { width: 48px; height: 48px; right: 12px; top: -18px; }
 
-.topbar {
-  position: relative;
-  z-index: 4;
-  padding: 14px 12px 8px;
-  text-align: center;
-}
-.topbar h1 {
-  color: white;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  text-shadow: 0 4px 14px rgba(62, 46, 140, .3);
-}
-.topbar p {
-  color: rgba(255,255,255,.95);
-  margin-top: 4px;
-  font-weight: 700;
-  font-size: clamp(.9rem, 2.3vw, 1.05rem);
-}
+.topbar { position: relative; z-index: 5; text-align: center; padding: 14px 12px 8px; }
+.topbar h1 { color: white; font-size: clamp(1.9rem, 5vw, 2.9rem); text-shadow: 0 4px 14px rgba(63,46,144,.3); }
+.topbar p { color: rgba(255,255,255,.96); margin-top: 4px; font-weight: 800; }
 
 .controls {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  padding: 8px 12px 10px;
+  padding: 8px 12px 8px;
 }
 .btn {
   border: none;
   border-radius: 999px;
   padding: 11px 16px;
   font-weight: 900;
-  cursor: pointer;
-  color: #5e3d91;
-  background: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.92);
+  color: #5c3c90;
   box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  cursor: pointer;
 }
-.btn.primary { background: linear-gradient(135deg, #ffd86b, #ff9db5); color: white; }
-.btn.active { background: linear-gradient(135deg, #ffbf4f, #ff7ca6); color: white; }
+.btn.primary, .btn.active { background: linear-gradient(135deg, #ffc64d, #ff81aa); color: white; }
 
 .status {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   display: flex;
   justify-content: center;
   padding: 0 12px 10px;
 }
 .status-card {
-  background: rgba(255,255,255,.82);
-  border: 3px solid rgba(255,255,255,.55);
-  box-shadow: 0 10px 24px rgba(66, 50, 134, .14);
+  background: rgba(255,255,255,.84);
+  border: 3px solid rgba(255,255,255,.6);
   border-radius: 24px;
+  box-shadow: 0 10px 24px rgba(66,50,134,.14);
+  width: min(980px, calc(100vw - 24px));
   padding: 12px 16px;
-  min-width: min(760px, calc(100vw - 24px));
-  max-width: 900px;
 }
-.song-title {
-  font-weight: 900;
-  color: #4a3b91;
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
-}
-.hint {
-  color: #38506d;
-  font-weight: 700;
-  margin-top: 6px;
-  min-height: 1.4em;
-}
-.progress {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
+.song-title { font-weight: 900; color: #493c91; font-size: clamp(1rem, 2.3vw, 1.2rem); }
+.hint { margin-top: 6px; color: #39506d; font-weight: 700; min-height: 1.4em; }
+.progress { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
 .pill {
-  min-width: 38px;
-  height: 38px;
-  border-radius: 999px;
-  padding: 0 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  background: #edf4ff;
-  border: 2px solid #d8e8ff;
-  color: #5242a0;
-  transition: all .16s ease;
+  min-width: 38px; height: 38px; padding: 0 10px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center; font-weight: 900;
+  background: #edf4ff; border: 2px solid #d7e8ff; color: #5243a0;
 }
-.pill.done { background: #99e68c; border-color: #59c767; color: #205d2f; }
+.pill.done { background: #9be88e; border-color: #59c76a; color: #245f30; }
 .pill.current { background: #ffe28d; border-color: #ffbf47; transform: scale(1.08); box-shadow: 0 0 0 5px rgba(255,191,71,.18); }
-.pill.miss { background: #ffb8b8; border-color: #ff7a7a; }
+.pill.miss { background: #ffbbbb; border-color: #ff7e7e; }
 
 .playfield {
   position: relative;
   flex: 1;
-  margin: 0 auto;
-  width: min(980px, calc(100vw - 12px));
   min-height: 0;
+  width: min(980px, calc(100vw - 10px));
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -146,139 +101,161 @@ body {
 .note-area {
   position: relative;
   flex: 1;
-  margin: 0 4px;
-  border-radius: 28px 28px 18px 18px;
+  min-height: 180px;
   overflow: hidden;
+  border-radius: 28px 28px 14px 14px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02)),
-    linear-gradient(180deg, rgba(82, 72, 178, .12), rgba(94, 178, 255, .08));
-  box-shadow: inset 0 -12px 24px rgba(255,255,255,.08);
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03)),
+    linear-gradient(180deg, rgba(87,78,185,.14), rgba(83,173,255,.06));
 }
-.lanes {
+.white-lanes, .black-lanes {
   position: absolute;
-  inset: 0;
+  left: 0; right: 0;
   display: flex;
-  gap: 6px;
-  padding: 0 10px;
+}
+.white-lanes {
+  inset: 0 0 0 0;
+  gap: 4px;
+  padding: 0 8px;
+}
+.black-lanes {
+  top: 0;
+  height: 70%;
+  pointer-events: none;
 }
 .lane {
-  flex: 1;
   position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
+  overflow: visible;
+}
+.white-lane {
+  flex: 1;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
   border-left: 1px solid rgba(255,255,255,.2);
   border-right: 1px solid rgba(255,255,255,.14);
 }
+.black-lane {
+  position: absolute;
+  width: 9.2%;
+  max-width: 86px;
+  min-width: 34px;
+  transform: translateX(-50%);
+  height: 100%;
+  background: linear-gradient(180deg, rgba(20,20,28,.22), rgba(20,20,28,.04));
+  border-left: 1px solid rgba(255,255,255,.08);
+  border-right: 1px solid rgba(255,255,255,.06);
+}
 .target-line {
   position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 12px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.55);
-  box-shadow: 0 0 18px rgba(255,255,255,.5);
+  left: 8px; right: 8px; bottom: 12px;
+  height: 10px; border-radius: 999px;
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 0 18px rgba(255,255,255,.45);
 }
 .falling-note {
   position: absolute;
-  width: calc(100% - 10px);
-  left: 5px;
-  height: 46px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,.2);
+  left: 50%; transform: translateX(-50%);
+  width: calc(100% - 8px);
+  min-width: 28px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; color: white; text-shadow: 0 1px 2px rgba(0,0,0,.25);
   box-shadow: 0 10px 18px rgba(0,0,0,.15), inset 0 4px 10px rgba(255,255,255,.18);
 }
-.falling-note.hit { transform: scale(1.08); }
-.falling-note.missed { filter: grayscale(.2) brightness(.8); opacity: .55; }
+.falling-note.waiting {
+  box-shadow: 0 0 0 5px rgba(255,255,255,.18), 0 10px 20px rgba(0,0,0,.15), inset 0 4px 10px rgba(255,255,255,.18);
+}
 
 .piano-shell {
   position: relative;
-  z-index: 3;
-  margin-top: -8px;
-  background: linear-gradient(180deg, #ff74ac 0%, #ff8d55 100%);
+  z-index: 4;
+  margin-top: -4px;
+  background: linear-gradient(180deg, #ff74ac 0%, #ff8c56 100%);
   border-radius: 30px 30px 0 0;
   padding: 14px 12px 14px;
   border: 6px solid rgba(255,255,255,.28);
-  box-shadow: 0 -8px 18px rgba(58, 44, 124, .14), 0 16px 36px rgba(58, 44, 124, .22);
+  box-shadow: 0 -8px 18px rgba(58,44,124,.14), 0 16px 36px rgba(58,44,124,.22);
 }
 .brand-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: white;
-  font-weight: 900;
-  margin-bottom: 12px;
+  display: flex; justify-content: space-between; gap: 12px; color: white; font-weight: 900; margin-bottom: 12px;
 }
 .brand-left { font-size: clamp(1rem, 2.4vw, 1.25rem); }
-.brand-right { font-size: clamp(.82rem, 1.9vw, .95rem); opacity: .95; }
+.brand-right { font-size: clamp(.82rem, 1.9vw, .95rem); opacity: .96; }
 .keyboard {
   position: relative;
-  display: flex;
-  gap: 6px;
-  height: min(27vh, 210px);
+  height: min(28vh, 220px);
 }
-.key {
+.white-keys {
+  position: absolute; inset: 0;
+  display: flex; gap: 4px;
+}
+.white-key {
   flex: 1;
   position: relative;
-  border-radius: 0 0 24px 24px;
-  border: 3px solid rgba(255,255,255,.36);
-  box-shadow: inset 0 -12px 0 rgba(0,0,0,.08), 0 8px 0 rgba(0,0,0,.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 12px 6px;
-  cursor: pointer;
-  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
-  color: white;
-}
-.key.black {
-  height: 62%;
-  flex: .62;
-  margin: 0 -2.4%;
-  z-index: 5;
-  align-self: flex-start;
+  border: 1px solid #cfcfcf;
+  border-bottom: 7px solid #b4b4b4;
   border-radius: 0 0 18px 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 78%, #ececec 100%);
+  box-shadow: inset 0 -8px 0 rgba(0,0,0,.04), 0 5px 0 rgba(0,0,0,.08);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 10px;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .14s ease, background .14s ease;
 }
-.key.active-window {
-  box-shadow: inset 0 -12px 0 rgba(0,0,0,.08), 0 0 0 6px rgba(255,255,255,.22), 0 0 24px rgba(255,255,255,.5), 0 10px 0 rgba(0,0,0,.08);
-  filter: brightness(1.1);
+.white-key.active-window {
+  background: linear-gradient(180deg, #fffdf0 0%, #fff6d9 78%, #f9e7ab 100%);
+  box-shadow: inset 0 -8px 0 rgba(0,0,0,.04), 0 0 0 5px rgba(255,232,130,.32), 0 0 20px rgba(255,238,163,.7), 0 5px 0 rgba(0,0,0,.08);
 }
-.key.pressed { transform: translateY(4px) scaleY(.985); }
-.key-label { font-weight: 900; font-size: clamp(.72rem, 1.8vw, .95rem); text-shadow: 0 1px 2px rgba(0,0,0,.25); }
-.key-icon { font-size: clamp(1.15rem, 3vw, 1.8rem); margin-bottom: 8px; }
-.key-gloss {
+.white-key.pressed { transform: translateY(3px); }
+.black-keys {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.black-key {
   position: absolute;
-  left: 10px; right: 10px; top: 10px; height: 22%;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,.38), transparent);
+  top: 0;
+  width: 9.2%;
+  max-width: 86px;
+  min-width: 34px;
+  height: 62%;
+  transform: translateX(-50%);
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(180deg, #33363d 0%, #111318 78%, #000000 100%);
+  border: 1px solid #050505;
+  border-bottom: 5px solid #000;
+  box-shadow: inset 0 -6px 0 rgba(255,255,255,.04), 0 5px 10px rgba(0,0,0,.35);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 8px;
+  color: rgba(255,255,255,.8);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .14s ease, background .14s ease;
+}
+.black-key.active-window {
+  background: linear-gradient(180deg, #575b64 0%, #1b1e25 78%, #050505 100%);
+  box-shadow: inset 0 -6px 0 rgba(255,255,255,.04), 0 0 0 4px rgba(255,232,130,.24), 0 0 18px rgba(255,238,163,.45), 0 5px 10px rgba(0,0,0,.35);
+}
+.black-key.pressed { transform: translateX(-50%) translateY(3px); }
+.key-label {
+  font-size: clamp(.68rem, 1.6vw, .9rem);
+  font-weight: 900;
+  user-select: none;
 }
 
 .spark {
-  position: fixed;
-  pointer-events: none;
-  z-index: 30;
-  font-size: 1.4rem;
+  position: fixed; pointer-events: none; z-index: 30; font-size: 1.3rem;
   animation: fly 850ms ease-out forwards;
 }
 @keyframes fly {
   0% { opacity: 1; transform: translateY(0) scale(.8) rotate(0deg); }
-  100% { opacity: 0; transform: translateY(-78px) scale(1.4) rotate(16deg); }
+  100% { opacity: 0; transform: translateY(-76px) scale(1.35) rotate(16deg); }
 }
 
 @media (max-width: 760px) {
-  .controls { gap: 8px; }
-  .btn { padding: 10px 14px; font-size: .92rem; }
-  .status-card { min-width: 0; width: 100%; }
   .playfield { width: calc(100vw - 8px); }
-  .note-area { border-radius: 22px 22px 14px 14px; }
-  .keyboard { height: min(25vh, 180px); gap: 4px; }
-  .key.black { margin: 0 -3%; }
+  .status-card { width: 100%; }
+  .note-area { border-radius: 22px 22px 12px 12px; }
+  .keyboard { height: min(26vh, 190px); }
 }
 </style>
 </head>
@@ -289,7 +266,7 @@ body {
 
   <div class="topbar">
     <h1>🎹 TiFpiano2</h1>
-    <p>Falling notes • glowing keys • Twinkle first</p>
+    <p>Falling notes that stop at the keys</p>
   </div>
 
   <div class="controls">
@@ -302,24 +279,28 @@ body {
 
   <div class="status">
     <div class="status-card">
-      <div class="song-title" id="songTitle">🌟 Twinkle Twinkle Little Star</div>
-      <div class="hint" id="hint">Notes fall from above. When one reaches the line, press that key.</div>
+      <div class="song-title">🌟 Twinkle Twinkle Little Star</div>
+      <div class="hint" id="hint">Each note falls in the matching lane, stops at the line, then waits for the correct key press.</div>
       <div class="progress" id="progress"></div>
     </div>
   </div>
 
   <div class="playfield">
     <div class="note-area" id="noteArea">
-      <div class="lanes" id="lanes"></div>
+      <div class="white-lanes" id="whiteLanes"></div>
+      <div class="black-lanes" id="blackLanes"></div>
       <div class="target-line"></div>
     </div>
 
     <div class="piano-shell">
       <div class="brand-row">
-        <div class="brand-left">✨ Rainbow Piano ✨</div>
-        <div class="brand-right">A S D F G H J K keys work too</div>
+        <div class="brand-left">Realistic Piano Layout</div>
+        <div class="brand-right">Keyboard: A W S E D F T G Y H U J K</div>
       </div>
-      <div class="keyboard" id="keyboard"></div>
+      <div class="keyboard" id="keyboard">
+        <div class="white-keys" id="whiteKeys"></div>
+        <div class="black-keys" id="blackKeys"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -333,77 +314,108 @@ function ensureAudio() {
 }
 
 const NOTES = [
-  { name: 'C', label: 'Do', freq: 261.63, color: '#ff5f8e', icon: '🐻', type: 'white' },
-  { name: 'C#', label: 'Do#', freq: 277.18, color: '#895dff', icon: '⭐', type: 'black' },
-  { name: 'D', label: 'Re', freq: 293.66, color: '#ff9648', icon: '🦊', type: 'white' },
-  { name: 'D#', label: 'Re#', freq: 311.13, color: '#5677ff', icon: '☁️', type: 'black' },
-  { name: 'E', label: 'Mi', freq: 329.63, color: '#ffd24c', icon: '🐥', type: 'white' },
-  { name: 'F', label: 'Fa', freq: 349.23, color: '#5ed86a', icon: '🐸', type: 'white' },
-  { name: 'F#', label: 'Fa#', freq: 369.99, color: '#1fc7c8', icon: '💧', type: 'black' },
-  { name: 'G', label: 'Sol', freq: 392.00, color: '#45b7ff', icon: '🐳', type: 'white' },
-  { name: 'G#', label: 'Sol#', freq: 415.30, color: '#4868ff', icon: '🌙', type: 'black' },
-  { name: 'A', label: 'La', freq: 440.00, color: '#9f6dff', icon: '🦄', type: 'white' },
-  { name: 'A#', label: 'La#', freq: 466.16, color: '#d04dff', icon: '✨', type: 'black' },
-  { name: 'B', label: 'Si', freq: 493.88, color: '#ff66b3', icon: '🦋', type: 'white' },
-  { name: 'C2', label: 'Do2', freq: 523.25, color: '#ff7a5b', icon: '🌈', type: 'white' }
+  { name: 'C', label: 'Do', freq: 261.63, color: '#ff5f8e', type: 'white', whiteIndex: 0 },
+  { name: 'C#', label: 'Do#', freq: 277.18, color: '#8a62ff', type: 'black', afterWhite: 0 },
+  { name: 'D', label: 'Re', freq: 293.66, color: '#ff944b', type: 'white', whiteIndex: 1 },
+  { name: 'D#', label: 'Re#', freq: 311.13, color: '#5577ff', type: 'black', afterWhite: 1 },
+  { name: 'E', label: 'Mi', freq: 329.63, color: '#ffd34e', type: 'white', whiteIndex: 2 },
+  { name: 'F', label: 'Fa', freq: 349.23, color: '#60d96b', type: 'white', whiteIndex: 3 },
+  { name: 'F#', label: 'Fa#', freq: 369.99, color: '#23c7c8', type: 'black', afterWhite: 3 },
+  { name: 'G', label: 'Sol', freq: 392.00, color: '#47b7ff', type: 'white', whiteIndex: 4 },
+  { name: 'G#', label: 'Sol#', freq: 415.30, color: '#4a6bff', type: 'black', afterWhite: 4 },
+  { name: 'A', label: 'La', freq: 440.00, color: '#a16dff', type: 'white', whiteIndex: 5 },
+  { name: 'A#', label: 'La#', freq: 466.16, color: '#cf4fff', type: 'black', afterWhite: 5 },
+  { name: 'B', label: 'Si', freq: 493.88, color: '#ff67b4', type: 'white', whiteIndex: 6 },
+  { name: 'C2', label: 'Do2', freq: 523.25, color: '#ff7b5d', type: 'white', whiteIndex: 7 }
 ];
-
-const SONG = {
-  name: 'Twinkle Twinkle Little Star',
-  notes: [0,0,7,7,9,9,7, 5,5,4,4,2,2,0],
-};
+const WHITE_ORDER = [0,2,4,5,7,9,11,12];
+const BLACK_ORDER = [1,3,6,8,10];
+const SONG = { notes: [0,0,7,7,9,9,7,5,5,4,4,2,2,0] };
+const HIT_LINE_OFFSET = 34;
+const NOTE_HEIGHT = 44;
+const WAIT_TOLERANCE = 10;
+const FALL_SPEED = 220; // px/sec
 
 let mode = 'song';
 let autoPlay = false;
 let songRunning = false;
 let activeNotes = [];
 let songTimers = [];
-let spawnIndex = 0;
 let progressIndex = 0;
 let missFlash = false;
-const noteDuration = 3600;
-const targetWindowPx = 54;
-let lastFrame = 0;
+let lastTs = 0;
+let queueSequence = 0;
 
 function shade(hex, amt) {
   const n = parseInt(hex.slice(1), 16);
-  let r = (n >> 16) + amt;
-  let g = ((n >> 8) & 255) + amt;
-  let b = (n & 255) + amt;
+  let r = (n >> 16) + amt, g = ((n >> 8) & 255) + amt, b = (n & 255) + amt;
   r = Math.max(0, Math.min(255, r));
   g = Math.max(0, Math.min(255, g));
   b = Math.max(0, Math.min(255, b));
   return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 }
 
-function buildLanes() {
-  const lanes = document.getElementById('lanes');
-  lanes.innerHTML = '';
-  NOTES.forEach(() => {
-    const lane = document.createElement('div');
-    lane.className = 'lane';
-    lanes.appendChild(lane);
-  });
-}
+function buildPianoAndLanes() {
+  const whiteKeys = document.getElementById('whiteKeys');
+  const blackKeys = document.getElementById('blackKeys');
+  const whiteLanes = document.getElementById('whiteLanes');
+  const blackLanes = document.getElementById('blackLanes');
+  whiteKeys.innerHTML = '';
+  blackKeys.innerHTML = '';
+  whiteLanes.innerHTML = '';
+  blackLanes.innerHTML = '';
 
-function buildKeyboard() {
-  const kb = document.getElementById('keyboard');
-  kb.innerHTML = '';
-  NOTES.forEach((note, index) => {
+  WHITE_ORDER.forEach(noteIndex => {
+    const note = NOTES[noteIndex];
+    const lane = document.createElement('div');
+    lane.className = 'lane white-lane';
+    lane.dataset.noteIndex = noteIndex;
+    whiteLanes.appendChild(lane);
+
     const key = document.createElement('button');
-    key.className = `key ${note.type}`;
-    key.dataset.index = index;
-    key.style.background = `linear-gradient(180deg, ${shade(note.color, 18)}, ${note.color} 70%, ${shade(note.color, -18)})`;
-    key.innerHTML = `<div class="key-gloss"></div><div class="key-icon">${note.icon}</div><div class="key-label">${note.label}</div>`;
-    key.addEventListener('pointerdown', e => { e.preventDefault(); handleInput(index); });
-    key.addEventListener('touchstart', e => { e.preventDefault(); handleInput(index); }, { passive: false });
-    kb.appendChild(key);
+    key.className = 'white-key';
+    key.dataset.noteIndex = noteIndex;
+    key.innerHTML = `<span class="key-label">${note.label}</span>`;
+    key.addEventListener('pointerdown', e => { e.preventDefault(); handleInput(noteIndex); });
+    key.addEventListener('touchstart', e => { e.preventDefault(); handleInput(noteIndex); }, { passive: false });
+    whiteKeys.appendChild(key);
+  });
+
+  requestAnimationFrame(() => {
+    const whiteKeyEls = [...document.querySelectorAll('.white-key')];
+    BLACK_ORDER.forEach(noteIndex => {
+      const note = NOTES[noteIndex];
+      const leftKey = whiteKeyEls[note.afterWhite];
+      const rightKey = whiteKeyEls[note.afterWhite + 1];
+      if (!leftKey || !rightKey) return;
+
+      const keyboardRect = document.getElementById('keyboard').getBoundingClientRect();
+      const leftRect = leftKey.getBoundingClientRect();
+      const rightRect = rightKey.getBoundingClientRect();
+      const centerPx = ((leftRect.right + rightRect.left) / 2) - keyboardRect.left;
+      const centerPercent = centerPx / keyboardRect.width * 100;
+
+      const lane = document.createElement('div');
+      lane.className = 'lane black-lane';
+      lane.dataset.noteIndex = noteIndex;
+      lane.style.left = `${centerPercent}%`;
+      blackLanes.appendChild(lane);
+
+      const key = document.createElement('button');
+      key.className = 'black-key';
+      key.dataset.noteIndex = noteIndex;
+      key.style.left = `${centerPercent}%`;
+      key.innerHTML = `<span class="key-label">${note.label}</span>`;
+      key.addEventListener('pointerdown', e => { e.preventDefault(); handleInput(noteIndex); });
+      key.addEventListener('touchstart', e => { e.preventDefault(); handleInput(noteIndex); }, { passive: false });
+      blackKeys.appendChild(key);
+    });
   });
 }
 
 function renderProgress() {
-  const progress = document.getElementById('progress');
-  progress.innerHTML = '';
+  const el = document.getElementById('progress');
+  el.innerHTML = '';
   SONG.notes.forEach((noteIndex, idx) => {
     const pill = document.createElement('div');
     pill.className = 'pill';
@@ -411,7 +423,7 @@ function renderProgress() {
     if (idx === progressIndex) pill.classList.add('current');
     if (missFlash && idx === progressIndex) pill.classList.add('miss');
     pill.textContent = NOTES[noteIndex].label;
-    progress.appendChild(pill);
+    el.appendChild(pill);
   });
 }
 
@@ -420,11 +432,9 @@ function setMode(next) {
   document.getElementById('mode-song').classList.toggle('active', next === 'song');
   document.getElementById('mode-free').classList.toggle('active', next === 'free');
   stopSong();
-  if (next === 'free') {
-    document.getElementById('hint').textContent = 'Free play mode. Tap any key.';
-  } else {
-    document.getElementById('hint').textContent = 'Notes fall from above. When one reaches the line, press that key.';
-  }
+  document.getElementById('hint').textContent = next === 'free'
+    ? 'Free play mode. Tap any piano key.'
+    : 'Each note falls in the matching lane, stops at the line, then waits for the correct key press.';
 }
 
 function toggleAuto() {
@@ -433,19 +443,16 @@ function toggleAuto() {
 }
 
 function startSong() {
-  if (mode !== 'song') {
-    setMode('song');
-  }
+  if (mode !== 'song') setMode('song');
   stopSong();
   songRunning = true;
-  spawnIndex = 0;
   progressIndex = 0;
+  queueSequence = 0;
   renderProgress();
-  document.getElementById('hint').textContent = 'Go. Hit each key when the falling note reaches the line.';
-
+  document.getElementById('hint').textContent = 'Song started. Wait for each note to land, then press the matching key.';
   SONG.notes.forEach((noteIndex, idx) => {
-    const timer = setTimeout(() => spawnNote(noteIndex, idx), idx * 900);
-    songTimers.push(timer);
+    const t = setTimeout(() => spawnNote(noteIndex, idx), idx * 1000);
+    songTimers.push(t);
   });
 }
 
@@ -455,90 +462,102 @@ function stopSong() {
   songTimers = [];
   activeNotes.forEach(n => n.el.remove());
   activeNotes = [];
-  clearKeyHighlights();
+  clearHighlights();
+}
+
+function laneFor(noteIndex) {
+  return document.querySelector(`.lane[data-note-index="${noteIndex}"]`);
 }
 
 function spawnNote(noteIndex, sequenceIndex) {
   if (!songRunning) return;
-  const lanes = document.querySelectorAll('.lane');
-  const lane = lanes[noteIndex];
+  const lane = laneFor(noteIndex);
   if (!lane) return;
   const note = NOTES[noteIndex];
   const el = document.createElement('div');
   el.className = 'falling-note';
   el.style.background = `linear-gradient(180deg, ${shade(note.color, 14)}, ${note.color})`;
-  el.innerHTML = `${note.icon} ${note.label}`;
+  el.textContent = note.label;
   lane.appendChild(el);
 
-  const obj = {
+  activeNotes.push({
     noteIndex,
     sequenceIndex,
     lane,
     el,
-    start: performance.now(),
+    y: -NOTE_HEIGHT - 8,
+    waiting: false,
     hit: false,
-    missed: false,
-  };
-  activeNotes.push(obj);
+  });
+}
+
+function targetYForLane(lane) {
+  return lane.clientHeight - HIT_LINE_OFFSET - NOTE_HEIGHT / 2;
 }
 
 function handleInput(noteIndex) {
   playTone(NOTES[noteIndex].freq);
-  flashKey(noteIndex, true);
+  pressKey(noteIndex);
 
   if (mode === 'free') return;
 
-  const candidate = activeNotes.find(n => !n.hit && !n.missed && n.noteIndex === noteIndex && inHitWindow(n));
+  const candidate = activeNotes.find(n => !n.hit && n.noteIndex === noteIndex && n.waiting && n.sequenceIndex === progressIndex);
   if (candidate) {
     candidate.hit = true;
-    candidate.el.classList.add('hit');
-    candidate.el.style.opacity = '0';
-    setTimeout(() => candidate.el.remove(), 140);
+    candidate.el.remove();
     activeNotes = activeNotes.filter(n => n !== candidate);
-    if (candidate.sequenceIndex === progressIndex) {
-      progressIndex += 1;
-      renderProgress();
-      document.getElementById('hint').textContent = progressIndex >= SONG.notes.length
-        ? 'Nice. Song finished.'
-        : `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
-      if (progressIndex >= SONG.notes.length) {
-        celebrate();
-        songRunning = false;
-      }
+    progressIndex += 1;
+    renderProgress();
+    if (progressIndex >= SONG.notes.length) {
+      document.getElementById('hint').textContent = 'Nice. Song finished.';
+      celebrate();
+      songRunning = false;
+    } else {
+      document.getElementById('hint').textContent = `Good. Next: ${NOTES[SONG.notes[progressIndex]].label}`;
     }
   } else if (songRunning) {
-    showMiss();
+    missFlash = true;
+    renderProgress();
+    document.getElementById('hint').textContent = 'Wrong key, or the note has not landed yet.';
+    setTimeout(() => { missFlash = false; renderProgress(); }, 220);
   }
 }
 
-function inHitWindow(noteObj) {
-  const laneRect = noteObj.lane.getBoundingClientRect();
-  const noteRect = noteObj.el.getBoundingClientRect();
-  const targetY = laneRect.bottom - 35;
-  const noteCenter = noteRect.top + noteRect.height / 2;
-  return Math.abs(noteCenter - targetY) <= targetWindowPx;
-}
-
-function flashKey(index, pressed = false) {
-  const key = document.querySelector(`.key[data-index="${index}"]`);
+function pressKey(noteIndex) {
+  const key = document.querySelector(`[data-note-index="${noteIndex}"].white-key, [data-note-index="${noteIndex}"].black-key`);
   if (!key) return;
   key.classList.add('pressed');
-  if (pressed) spawnSpark(key, NOTES[index].icon, NOTES[index].color);
+  spawnSpark(key, noteIndex);
   setTimeout(() => key.classList.remove('pressed'), 110);
 }
 
-function clearKeyHighlights() {
-  document.querySelectorAll('.key').forEach(k => k.classList.remove('active-window'));
+function clearHighlights() {
+  document.querySelectorAll('.white-key,.black-key').forEach(k => k.classList.remove('active-window'));
 }
 
-function showMiss() {
-  missFlash = true;
-  renderProgress();
-  document.getElementById('hint').textContent = 'Too early or wrong key. Wait for the note to reach the line.';
-  setTimeout(() => {
-    missFlash = false;
-    renderProgress();
-  }, 220);
+function highlightWaitingNotes() {
+  clearHighlights();
+  activeNotes.forEach(n => {
+    if (n.waiting && n.sequenceIndex === progressIndex) {
+      const key = document.querySelector(`[data-note-index="${n.noteIndex}"].white-key, [data-note-index="${n.noteIndex}"].black-key`);
+      if (key) key.classList.add('active-window');
+      n.el.classList.add('waiting');
+    } else {
+      n.el.classList.remove('waiting');
+    }
+  });
+}
+
+function spawnSpark(keyEl, noteIndex) {
+  const rect = keyEl.getBoundingClientRect();
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.textContent = '✨';
+  s.style.left = `${rect.left + rect.width / 2 - 8}px`;
+  s.style.top = `${rect.top + 8}px`;
+  s.style.color = NOTES[noteIndex].color;
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 850);
 }
 
 function celebrate() {
@@ -554,18 +573,6 @@ function celebrate() {
       setTimeout(() => s.remove(), 850);
     }, i * 60);
   }
-}
-
-function spawnSpark(sourceEl, icon, color) {
-  const rect = sourceEl.getBoundingClientRect();
-  const s = document.createElement('div');
-  s.className = 'spark';
-  s.textContent = icon;
-  s.style.left = `${rect.left + rect.width / 2 - 8}px`;
-  s.style.top = `${rect.top + 10}px`;
-  s.style.color = color;
-  document.body.appendChild(s);
-  setTimeout(() => s.remove(), 850);
 }
 
 function playTone(freq, duration = .42) {
@@ -586,44 +593,32 @@ function playTone(freq, duration = .42) {
   g2.gain.exponentialRampToValueAtTime(.0001, now + duration * .65);
   o1.connect(g1).connect(audioCtx.destination);
   o2.connect(g2).connect(audioCtx.destination);
-  o1.start(now); o2.start(now);
-  o1.stop(now + duration + .05); o2.stop(now + duration + .05);
+  o1.start(now); o2.start(now); o1.stop(now + duration + .05); o2.stop(now + duration + .05);
 }
 
 function animate(ts) {
-  if (!lastFrame) lastFrame = ts;
-  clearKeyHighlights();
-  const lanes = document.querySelectorAll('.lane');
+  if (!lastTs) lastTs = ts;
+  const dt = (ts - lastTs) / 1000;
+  lastTs = ts;
 
   activeNotes = activeNotes.filter(noteObj => {
-    const laneRect = noteObj.lane.getBoundingClientRect();
-    const areaRect = document.getElementById('noteArea').getBoundingClientRect();
-    const progress = Math.min(1, (ts - noteObj.start) / noteDuration);
-    const top = progress * (areaRect.height - 70);
-    noteObj.el.style.top = `${top}px`;
-
-    const targetY = laneRect.height - 35;
-    const noteCenter = top + 23;
-    if (Math.abs(noteCenter - targetY) <= targetWindowPx) {
-      const key = document.querySelector(`.key[data-index="${noteObj.noteIndex}"]`);
-      if (key) key.classList.add('active-window');
-      if (autoPlay && !noteObj.hit && noteObj.sequenceIndex === progressIndex && Math.abs(noteCenter - targetY) <= 10) {
-        handleInput(noteObj.noteIndex);
+    if (noteObj.hit) return false;
+    const targetY = targetYForLane(noteObj.lane);
+    if (!noteObj.waiting) {
+      noteObj.y += FALL_SPEED * dt;
+      if (noteObj.y >= targetY - WAIT_TOLERANCE) {
+        noteObj.y = targetY;
+        noteObj.waiting = true;
+        if (autoPlay && noteObj.sequenceIndex === progressIndex) {
+          setTimeout(() => handleInput(noteObj.noteIndex), 180);
+        }
       }
     }
-
-    if (progress >= 1 && !noteObj.hit) {
-      noteObj.missed = true;
-      noteObj.el.classList.add('missed');
-      noteObj.el.remove();
-      if (noteObj.sequenceIndex === progressIndex && songRunning) {
-        showMiss();
-      }
-      return false;
-    }
+    noteObj.el.style.top = `${noteObj.y}px`;
     return true;
   });
 
+  highlightWaitingNotes();
   requestAnimationFrame(animate);
 }
 
@@ -638,8 +633,11 @@ document.addEventListener('keydown', e => {
   }
 });
 
-buildLanes();
-buildKeyboard();
+window.addEventListener('resize', () => {
+  buildPianoAndLanes();
+});
+
+buildPianoAndLanes();
 renderProgress();
 requestAnimationFrame(animate);
 </script>
