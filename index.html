@@ -102,7 +102,11 @@ body { background: linear-gradient(180deg, #7ed8ff 0%, #92b7ff 40%, #a881ff 100%
 <script>
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
-function ensureAudio() { if (!audioCtx) audioCtx = new AudioCtx(); if (audioCtx.state === 'suspended') audioCtx.resume(); }
+function ensureAudio() {
+  if (!audioCtx) audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') return audioCtx.resume();
+  return Promise.resolve();
+}
 const NOTES = [
   { name: 'C', label: 'Do', freq: 261.63, color: '#ff5f8e', type: 'white', whiteIndex: 0 },
   { name: 'C#', label: 'Do#', freq: 277.18, color: '#8a62ff', type: 'black', afterWhite: 0 },
@@ -239,7 +243,8 @@ function completeActiveNote() {
   }
 }
 
-function handleInput(noteIndex) {
+async function handleInput(noteIndex) {
+  await ensureAudio();
   playTone(NOTES[noteIndex].freq);
   pressKey(noteIndex);
   if (mode === 'free') return;
@@ -286,7 +291,7 @@ function celebrate() {
   }
 }
 function playTone(freq, duration = .42) {
-  ensureAudio();
+  if (!audioCtx) return;
   const now = audioCtx.currentTime;
   const o1 = audioCtx.createOscillator(), o2 = audioCtx.createOscillator(), g1 = audioCtx.createGain(), g2 = audioCtx.createGain();
   o1.type = 'triangle'; o1.frequency.setValueAtTime(freq, now); g1.gain.setValueAtTime(.0001, now); g1.gain.exponentialRampToValueAtTime(.23, now + .02); g1.gain.exponentialRampToValueAtTime(.0001, now + duration);
